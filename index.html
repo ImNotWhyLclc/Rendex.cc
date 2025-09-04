@@ -18,15 +18,15 @@
     h1, h2, h3, h4, h5, h6 { font-family: "Poppins", sans-serif; }
 
     :root {
-      --bg: #121212;
+      --bg: #0F0F0F; /* Darker dark mode */
       --text: #ffffff;
-      --card-bg: #1e1e1e;
-      --card-border: #2e2e2e;
+      --card-bg: #1A1A1A; /* Darker card background */
+      --card-border: #2E2E2E;
       --header-bg: #121212;
-      --input-bg: #2e2e2e;
+      --input-bg: #2E2E2E;
       --input-text: #ffffff;
       --input-border: #444;
-      --dropdown-bg: #2d2d2d;
+      --dropdown-bg: #252525; /* Darker dropdown */
       --dropdown-hover: #404040;
       --dropdown-text: #ffffff;
       --accent-yellow: #FFEB3B;
@@ -39,23 +39,23 @@
       --gradient-green-dark: #00CC00;
       --gradient-red-light: #FF0000;
       --gradient-red-dark: #CC0000;
-      --search-bg: #2d2d2d;
+      --search-bg: #2D2D2D;
       --search-border: #444;
       --search-text: #ffffff;
-      --search-placeholder: #aaaaaa;
-      --search-focus-border: #7b7bff;
+      --search-placeholder: #AAAAAA;
+      --search-focus-border: #7B7BFF;
     }
     body.light-theme {
-      --bg: #ffffff;
+      --bg: #FFFFFF;
       --text: #000000;
-      --card-bg: #f9f9f9;
-      --card-border: #cccccc;
-      --header-bg: #f2f2f2;
-      --input-bg: #ffffff;
+      --card-bg: #F9F9F9;
+      --card-border: #CCCCCC;
+      --header-bg: #F2F2F2;
+      --input-bg: #FFFFFF;
       --input-text: #000000;
-      --input-border: #bbb;
-      --dropdown-bg: #ffffff;
-      --dropdown-hover: #eee;
+      --input-border: #BBB;
+      --dropdown-bg: #FFFFFF;
+      --dropdown-hover: #EEE;
       --dropdown-text: #000000;
       --gradient-cyan-light: #00E5FF;
       --gradient-cyan-dark: #00BCD4;
@@ -66,11 +66,11 @@
       --gradient-red-light: #E57373;
       --gradient-red-dark: #F44336;
       --accent-yellow: #FFEB3B;
-      --search-bg: #f2f2f2;
-      --search-border: #ddd;
+      --search-bg: #F2F2F2;
+      --search-border: #DDD;
       --search-text: #333333;
       --search-placeholder: #888888;
-      --search-focus-border: #7b7bff;
+      --search-focus-border: #7B7BFF;
     }
 
     .navbar, .item-header, .item-body, .exploit-item, .theme-dropdown {
@@ -144,11 +144,15 @@
       padding: 8px 12px;
       height: 36px;
       border-radius: 8px;
-      font-size: 0.9rem;
+      font-size: 1rem; /* Bolder text */
+      font-weight: 500;
       display: flex;
       align-items: center;
       gap: 6px;
-      transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s ease;
+    }
+    .theme-button:hover {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
     .theme-button svg.icon {
       width: 16px;
@@ -168,7 +172,7 @@
       border: 1px solid var(--input-border);
       border-radius: 8px;
       padding: 8px 0;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.2s ease-out;
@@ -179,15 +183,17 @@
     }
     .theme-dropdown button {
       width: 100%;
-      padding: 8px 12px;
+      padding: 10px 12px;
       color: var(--dropdown-text);
-      font-size: 0.9rem;
+      font-size: 1rem; /* Bolder text */
+      font-weight: 500;
       text-align: left;
       border-radius: 4px;
-      transition: background-color 0.2s ease;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
     .theme-dropdown button:hover {
       background-color: var(--dropdown-hover);
+      color: #FFD700; /* Gold accent for "bro" vibe */
     }
     .theme-button .chevron {
       width: 16px;
@@ -524,7 +530,7 @@
 </head>
 <body>
   <nav class="navbar">
-    <img src="https://raw.githubusercontent.com/ImNotWhyLclc/Rendex.cc/main/5DB63475-7C5E-4925-9919-13A58DABC9AC.png" alt="Rendex Logo" class="site-logo" />
+    <img src="https://raw.githubusercontent.com/ImNotWhyLclc/Rendex.cc/main/IMG_0451.jpeg" alt="Rendex Logo" class="site-logo" />
     <div class="search-container">
       <input id="searchInput" type="search" placeholder="Search..." aria-label="Search exploits" />
     </div>
@@ -572,7 +578,7 @@
               Website
             </button>
             <button onclick="window.open('https://discord.gg/codexlol','_blank')" aria-label="Join Codex Discord">
-              <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-4.636 9.938c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245-.246-1.562-.762-2.951-1.138l-.414-.084c.178-.246.336-.499.471-.763l.116-.232c.086-.175.144-.355.175-.538v-2.017c-.02-1.198-.412-2.341-1.145-3.318l-.161-.23c-.046-.05-.095-.096-.146-.138-.043-.033-.088-.062-.134-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l-.818 2.228c-.973-.118-1.888-.404-2.702-.852-.05-.03-.094-.062-.136-.098-.052-.044-.1-.09-.147-.139l-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823-.05 1.222-.147l.434-.093c.242-.18.49-.32.74-.42l.228-.102c.183-.082.37-.14.558-.174l.106-.022h7.818l.467-.091c.256-.13.51-.29.754-.48l.172-.136c.05-.04.097-.083.142-.128.05-.048.1-.096.147-.147.733-.969 1.135-2.114 1.115-3.315v-2.138c0-.355-.132-.697-.366-.934z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M18 4c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4zm-6 0c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4zm-6 0c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4z" fill="currentColor"/></svg>
               Discord
             </button>
           </div>
@@ -779,7 +785,7 @@
     <div class="category-heading">Frequently Asked Questions</div>
     <section class="faq-list">
       <p><strong>Is Delta free?</strong> Yes, Delta is free.</p>
-      <p><strong>Do I have to pay for Ronix?</strong> No, Ronix is free, but ads might show up.</p>
+      <p><strong>Do I have to pay for Ronix?</strong> No.</p>
       <p><strong>What’s an .apk file?</strong> It’s the file type for Android apps.</p>
       <p><strong>Where can I get help with Ronix?</strong> Check their Discord server for support.</p>
     </section>
@@ -807,7 +813,8 @@
     });
 
     function setTheme(theme) {
-      document.body.className = theme === 'dark' ? '' : 'light-theme';
+      document.body.className = ''; // Clear all classes first
+      if (theme !== 'dark') document.body.classList.add('light-theme');
       localStorage.setItem('theme', theme);
       isDropdownOpen = false;
       themeToggle.classList.remove('open');
