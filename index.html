@@ -74,7 +74,7 @@
     }
 
     .navbar, .item-header, .item-body, .exploit-item, .theme-dropdown {
-      transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      transition: background-color 0.5s ease, color 0.5s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -171,11 +171,11 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.2s ease-out; /* Fast, smooth slide */
+      transition: max-height 0.2s ease-out;
       z-index: 1000;
     }
     .theme-container.open .theme-dropdown {
-      max-height: 100px; /* Adjust based on content height */
+      max-height: 100px;
     }
     .theme-dropdown button {
       width: 100%;
@@ -226,7 +226,7 @@
     .exploit-item {
       opacity: 0;
       transform: translateY(10px);
-      animation: cardFadeIn 0.3s forwards ease-out; /* Fast, smooth fade */
+      animation: cardFadeIn 0.3s forwards ease-out;
     }
     .exploit-list {
       display: flex;
@@ -245,7 +245,7 @@
       transition: transform 0.2s ease;
     }
     .exploit-item:hover {
-      transform: scale(1.02); /* Card hover animation */
+      transform: scale(1.02);
     }
     .status-updated    { border-left-color: var(--gradient-green-dark); }
     .status-notupdated { border-left-color: var(--gradient-red-dark); }
@@ -460,7 +460,7 @@
       flex-direction: column;
       overflow: hidden;
       transform: scale(0.9);
-      transition: transform 0.2s ease, opacity 0.2s ease; /* Modal open animation */
+      transition: transform 0.2s ease, opacity 0.2s ease;
       opacity: 0;
     }
     .modal-overlay.show .modal-content {
@@ -524,7 +524,7 @@
 </head>
 <body>
   <nav class="navbar">
-    <img src="https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/5DB63475-7C5E-4925-9919-13A58DABC9AC.png" alt="Rendex Logo" class="site-logo" />
+    <img src="https://raw.githubusercontent.com/ImNotWhyLclc/Rendex.cc/main/5DB63475-7C5E-4925-9919-13A58DABC9AC.png" alt="Rendex Logo" class="site-logo" />
     <div class="search-container">
       <input id="searchInput" type="search" placeholder="Search..." aria-label="Search exploits" />
     </div>
@@ -562,9 +562,6 @@
         <div class="item-subheader">Last updated: 05/22/2025 at 8:09 PM UTC</div>
         <div class="item-body">
           <div class="no-preview">Preview is not available at the moment</div>
-          <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
-            Codex is a top-notch Roblox script executor for iOS and Android, packed with a huge Script Hub and smooth platform support.
-          </p>
           <div class="card-banner-inner">Detected by Hyperion</div>
           <div class="download-disclaimer">
             <strong>Warning:</strong> Executable files may contain risks. Scan with antivirus software and download only from trusted sources.
@@ -575,7 +572,7 @@
               Website
             </button>
             <button onclick="window.open('https://discord.gg/codexlol','_blank')" aria-label="Join Codex Discord">
-              <svg viewBox="0 0 24 24"><path d="M7.636 11.938c0 1.322-1.059 2.397-2.363 2.397S2.909 13.26 2.909 11.938c0-1.322 1.06-2.397 2.364-2.397s2.363 1.075 2.363 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245-.246-1.562-.762-2.951-1.138l-.414-.084c.178-.246.336-.499.471-.763l.116-.232c.086-.175.144-.355.175-.538v-2.017c-.02-1.198-.412-2.341-1.145-3.318l-.161-.23c-.046-.05-.095-.096-.146-.138-.043-.033-.088-.062-.134-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l-.818 2.228c-.973-.118-1.888-.404-2.702-.852-.05-.03-.094-.062-.136-.098-.052-.044-.1-.09-.147-.139l-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823-.05 1.222-.147l.434-.093c.242-.18.49-.32.74-.42l.228-.102c.183-.082.37-.14.558-.174l.106-.022h7.818l.467-.091c.256-.13.51-.29.754-.48l.172-.136c.05-.04.097-.083.142-.128.05-.048.1-.096.147-.147.733-.969 1.135-2.114 1.115-3.315v-2.138c0-.355-.132-.697-.366-.934z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-4.636 9.938c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245-.246-1.562-.762-2.951-1.138l-.414-.084c.178-.246.336-.499.471-.763l.116-.232c.086-.175.144-.355.175-.538v-2.017c-.02-1.198-.412-2.341-1.145-3.318l-.161-.23c-.046-.05-.095-.096-.146-.138-.043-.033-.088-.062-.134-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l-.818 2.228c-.973-.118-1.888-.404-2.702-.852-.05-.03-.094-.062-.136-.098-.052-.044-.1-.09-.147-.139l-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823-.05 1.222-.147l.434-.093c.242-.18.49-.32.74-.42l.228-.102c.183-.082.37-.14.558-.174l.106-.022h7.818l.467-.091c.256-.13.51-.29.754-.48l.172-.136c.05-.04.097-.083.142-.128.05-.048.1-.096.147-.147.733-.969 1.135-2.114 1.115-3.315v-2.138c0-.355-.132-.697-.366-.934z" fill="currentColor"/></svg>
               Discord
             </button>
           </div>
@@ -606,10 +603,7 @@
         </div>
         <div class="item-subheader">Last updated: 09/02/2025 at 8:00 PM UTC</div>
         <div class="item-body">
-          <img src="https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0496.png" alt="Delta Preview" class="item-preview" />
-          <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
-            Delta takes Roblox scripting to the next level with its Gloopintosh engine, giving you a premium feel, quick updates, and solid performance—all for free!
-          </p>
+          <img src="https://raw.githubusercontent.com/ImNotWhyLclc/Rendex.cc/main/IMG_0496.png" alt="Delta Preview" class="item-preview" />
           <div class="card-banner-inner">Detected by Hyperion</div>
           <div class="download-disclaimer">
             <strong>Warning:</strong> Executable files may contain risks. Scan with antivirus software and download only from trusted sources.
@@ -620,7 +614,7 @@
               Website
             </button>
             <button onclick="window.open('https://discord.gg/deltax','_blank')" aria-label="Join Delta Discord">
-              <svg viewBox="0 0 24 24"><path d="M7.636 11.938c0 1.322-1.059 2.397-2.363 2.397S2.909 13.26 2.909 11.938c0-1.322 1.06-2.397 2.364-2.397s2.363 1.075 2.363 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245-.246-1.562-.762-2.951-1.138l-.414-.084c.178-.246.336-.499.471-.763l.116-.232c.086-.175.144-.355.175-.538v-2.017c-.02-1.198-.412-2.341-1.145-3.318l-.161-.23c-.046-.05-.095-.096-.146-.138-.043-.033-.088-.062-.134-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l-.818 2.228c-.973-.118-1.888-.404-2.702-.852-.05-.03-.094-.062-.136-.098-.052-.044-.1-.09-.147-.139l-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823-.05 1.222-.147l.434-.093c.242-.18.49-.32.74-.42l.228-.102c.183-.082.37-.14.558-.174l.106-.022h7.818l.467-.091c.256-.13.51-.29.754-.48l.172-.136c.05-.04.097-.083.142-.128.05-.048.1-.096.147-.147.733-.969 1.135-2.114 1.115-3.315v-2.138c0-.355-.132-.697-.366-.934z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M18 4c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4zm-6 0c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4zm-6 0c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4z" fill="currentColor"/></svg>
               Discord
             </button>
             <button onclick="window.open('https://gloopup.net/Delta/ios/','_blank')" aria-label="Download Delta for iOS">
@@ -660,9 +654,6 @@
         <div class="item-subheader">Last updated: 09/02/2025 at 8:59 PM UTC</div>
         <div class="item-body">
           <div class="no-preview">Preview is not available at the moment</div>
-          <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
-            Codex is a top-notch Roblox script executor for iOS and Android, packed with a huge Script Hub and smooth platform support.
-          </p>
           <div class="card-banner-inner">Detected by Hyperion</div>
           <div class="download-disclaimer">
             <strong>Warning:</strong> Executable files may contain risks. Scan with antivirus software and download only from trusted sources.
@@ -673,7 +664,7 @@
               Website
             </button>
             <button onclick="window.open('https://discord.gg/codexlol','_blank')" aria-label="Join Codex Discord">
-              <svg viewBox="0 0 24 24"><path d="M7.636 11.938c0 1.322-1.059 2.397-2.363 2.397S2.909 13.26 2.909 11.938c0-1.322 1.06-2.397 2.364-2.397s2.363 1.075 2.363 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245-.246-1.562-.762-2.951-1.138l-.414-.084c.178-.246.336-.499.471-.763l.116-.232c.086-.175.144-.355.175-.538v-2.017c-.02-1.198-.412-2.341-1.145-3.318l-.161-.23c-.046-.05-.095-.096-.146-.138-.043-.033-.088-.062-.134-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l-.818 2.228c-.973-.118-1.888-.404-2.702-.852-.05-.03-.094-.062-.136-.098-.052-.044-.1-.09-.147-.139l-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823-.05 1.222-.147l.434-.093c.242-.18.49-.32.74-.42l.228-.102c.183-.082.37-.14.558-.174l.106-.022h7.818l.467-.091c.256-.13.51-.29.754-.48l.172-.136c.05-.04.097-.083.142-.128.05-.048.1-.096.147-.147.733-.969 1.135-2.114 1.115-3.315v-2.138c0-.355-.132-.697-.366-.934z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M18 4c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4zm-6 0c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4zm-6 0c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4z" fill="currentColor"/></svg>
               Discord
             </button>
             <button onclick="window.open('https://www.mediafire.com/file/kxpmihdc91o6tgz/Codex_v2.688.apk/file','_blank')" aria-label="Download Codex for Android">
@@ -708,10 +699,7 @@
         </div>
         <div class="item-subheader">Last updated: 09/02/2025 at 8:00 PM UTC</div>
         <div class="item-body">
-          <img src="https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0496.png" alt="Delta Preview" class="item-preview" />
-          <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
-            Delta takes Roblox scripting to the next level with its Gloopintosh engine, giving you a premium feel, quick updates, and solid performance—all for free!
-          </p>
+          <img src="https://raw.githubusercontent.com/ImNotWhyLclc/Rendex.cc/main/IMG_0496.png" alt="Delta Preview" class="item-preview" />
           <div class="card-banner-inner">Detected by Hyperion</div>
           <div class="download-disclaimer">
             <strong>Warning:</strong> Executable files may contain risks. Scan with antivirus software and download only from trusted sources.
@@ -722,7 +710,7 @@
               Website
             </button>
             <button onclick="window.open('https://discord.gg/deltax','_blank')" aria-label="Join Delta Discord">
-              <svg viewBox="0 0 24 24"><path d="M7.636 11.938c0 1.322-1.059 2.397-2.363 2.397S2.909 13.26 2.909 11.938c0-1.322 1.06-2.397 2.364-2.397s2.363 1.075 2.363 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245-.246-1.562-.762-2.951-1.138l-.414-.084c.178-.246.336-.499.471-.763l.116-.232c.086-.175.144-.355.175-.538v-2.017c-.02-1.198-.412-2.341-1.145-3.318l-.161-.23c-.046-.05-.095-.096-.146-.138-.043-.033-.088-.062-.134-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l-.818 2.228c-.973-.118-1.888-.404-2.702-.852-.05-.03-.094-.062-.136-.098-.052-.044-.1-.09-.147-.139l-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823-.05 1.222-.147l.434-.093c.242-.18.49-.32.74-.42l.228-.102c.183-.082.37-.14.558-.174l.106-.022h7.818l.467-.091c.256-.13.51-.29.754-.48l.172-.136c.05-.04.097-.083.142-.128.05-.048.1-.096.147-.147.733-.969 1.135-2.114 1.115-3.315v-2.138c0-.355-.132-.697-.366-.934z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M18 4c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4zm-6 0c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4zm-6 0c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4z" fill="currentColor"/></svg>
               Discord
             </button>
             <button onclick="window.open('https://updowncontent.com/android.html','_blank')" aria-label="Download Delta for Android">
@@ -758,9 +746,6 @@
         <div class="item-subheader">Last updated: 09/02/2025 at 8:00 PM UTC</div>
         <div class="item-body">
           <div class="no-preview">Preview is not available at the moment</div>
-          <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
-            Ronix delivers a powerful and reliable script executor for Android, with slick bypass techniques and cloud-based script management.
-          </p>
           <div class="card-banner-inner">Detected by Hyperion</div>
           <div class="download-disclaimer">
             <strong>Warning:</strong> Executable files may contain risks. Scan with antivirus software and download only from trusted sources.
@@ -771,7 +756,7 @@
               Website
             </button>
             <button onclick="window.open('https://discord.gg/ronixstudios','_blank')" aria-label="Join Ronix Discord">
-              <svg viewBox="0 0 24 24"><path d="M7.636 11.938c0 1.322-1.059 2.397-2.363 2.397S2.909 13.26 2.909 11.938c0-1.322 1.06-2.397 2.364-2.397s2.363 1.075 2.363 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245-.246-1.562-.762-2.951-1.138l-.414-.084c.178-.246.336-.499.471-.763l.116-.232c.086-.175.144-.355.175-.538v-2.017c-.02-1.198-.412-2.341-1.145-3.318l-.161-.23c-.046-.05-.095-.096-.146-.138-.043-.033-.088-.062-.134-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l-.818 2.228c-.973-.118-1.888-.404-2.702-.852-.05-.03-.094-.062-.136-.098-.052-.044-.1-.09-.147-.139l-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823-.05 1.222-.147l.434-.093c.242-.18.49-.32.74-.42l.228-.102c.183-.082.37-.14.558-.174l.106-.022h7.818l.467-.091c.256-.13.51-.29.754-.48l.172-.136c.05-.04.097-.083.142-.128.05-.048.1-.096.147-.147.733-.969 1.135-2.114 1.115-3.315v-2.138c0-.355-.132-.697-.366-.934z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M18 4c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4zm-6 0c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4zm-6 0c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4z" fill="currentColor"/></svg>
               Discord
             </button>
             <button onclick="window.open('https://wearedevs.net/d/Ronix','_blank')" aria-label="Download Ronix for Android">
@@ -793,10 +778,10 @@
 
     <div class="category-heading">Frequently Asked Questions</div>
     <section class="faq-list">
-      <p><strong>Is Delta free?</strong> Yep, Delta’s totally free—no catch, just enjoy it!</p>
-      <p><strong>Do I have to pay for Ronix?</strong> Nah, it’s free too, though you might see some ads to keep it running.</p>
-      <p><strong>What’s an .apk file?</strong> Just the file type for Android apps—pretty standard stuff.</p>
-      <p><strong>Where can I get help with Ronix?</strong> Jump on their Discord server; folks there can help out, though it’s not guaranteed.</p>
+      <p><strong>Is Delta free?</strong> Yes, Delta is free.</p>
+      <p><strong>Do I have to pay for Ronix?</strong> No, Ronix is free, but ads might show up.</p>
+      <p><strong>What’s an .apk file?</strong> It’s the file type for Android apps.</p>
+      <p><strong>Where can I get help with Ronix?</strong> Check their Discord server for support.</p>
     </section>
   </div>
 
@@ -811,7 +796,6 @@
   </div>
 
   <script>
-    // Theme Toggle
     let isDropdownOpen = false;
     const themeToggle = document.getElementById('themeToggle');
     const themeDropdown = document.getElementById('themeDropdown');
@@ -833,7 +817,6 @@
     const savedTheme = localStorage.getItem('theme') || 'dark';
     setTheme(savedTheme);
 
-    // Search Functionality
     const searchInput = document.getElementById('searchInput');
     searchInput.addEventListener('input', () => {
       const query = searchInput.value.toLowerCase().trim();
@@ -846,7 +829,6 @@
       });
     });
 
-    // Card Toggle
     function toggleBody(headerEl) {
       const item = headerEl.closest('.exploit-item');
       const body = item.querySelector('.item-body');
@@ -856,7 +838,6 @@
       headerEl.setAttribute('aria-expanded', isOpen);
     }
 
-    // sUNC Modal
     function showModal(suncUrl) {
       const modal = document.getElementById('suncModal');
       const modalBody = modal.querySelector('.modal-body');
@@ -871,7 +852,6 @@
       modal.classList.remove('show');
     }
 
-    // Initial Card Load
     document.querySelectorAll('.exploit-item').forEach(card => {
       card.style.opacity = '1';
     });
