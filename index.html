@@ -73,8 +73,8 @@
       --search-focus-border: #7b7bff;
     }
 
-    .navbar, .item-header, .item-body, .exploit-item, .theme-panel {
-      transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, transform 0.3s ease;
+    .navbar, .item-header, .item-body, .exploit-item, .theme-dropdown {
+      transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.3s ease, transform 0.3s ease;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -133,7 +133,7 @@
       box-shadow: 0 0 0 2px rgba(123,123,255,0.2);
     }
 
-    /* THEME PANEL */
+    /* THEME DROPDOWN */
     .theme-container {
       position: relative;
     }
@@ -159,24 +159,25 @@
       stroke-linecap: round;
       stroke-linejoin: round;
     }
-    .theme-panel {
-      position: fixed;
-      top: 60px;
-      right: -200px; /* Start off-screen */
-      width: 180px;
+    .theme-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 120px;
       background-color: var(--dropdown-bg);
       border: 1px solid var(--input-border);
       border-radius: 8px;
-      padding: 10px;
+      padding: 8px 0;
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      transform: translateX(0);
-      transition: right 0.3s ease, transform 0.3s ease;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out; /* Fast, smooth slide */
       z-index: 1000;
     }
-    .theme-panel.open {
-      right: 16px; /* Slide in from right */
+    .theme-container.open .theme-dropdown {
+      max-height: 100px; /* Adjust based on content height */
     }
-    .theme-panel button {
+    .theme-dropdown button {
       width: 100%;
       padding: 8px 12px;
       color: var(--dropdown-text);
@@ -185,7 +186,7 @@
       border-radius: 4px;
       transition: background-color 0.2s ease;
     }
-    .theme-panel button:hover {
+    .theme-dropdown button:hover {
       background-color: var(--dropdown-hover);
     }
     .theme-button .chevron {
@@ -196,9 +197,9 @@
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
-      transition: transform 0.3s ease;
+      transition: transform 0.2s ease;
     }
-    .theme-button.open .chevron {
+    .theme-container.open .chevron {
       transform: rotate(180deg);
     }
 
@@ -225,11 +226,8 @@
     .exploit-item {
       opacity: 0;
       transform: translateY(10px);
-      animation: cardFadeIn 0.5s forwards ease-out;
+      animation: cardFadeIn 0.3s forwards ease-out; /* Fast, smooth fade */
     }
-    .exploit-list .exploit-item:nth-child(1) { animation-delay: 0.05s; }
-    .exploit-list .exploit-item:nth-child(2) { animation-delay: 0.10s; }
-    .exploit-list .exploit-item:nth-child(3) { animation-delay: 0.15s; }
     .exploit-list {
       display: flex;
       flex-direction: column;
@@ -244,9 +242,10 @@
       border-left-width: 6px;
       border-radius: 8px;
       overflow: hidden;
+      transition: transform 0.2s ease;
     }
     .exploit-item:hover {
-      transform: translateY(-2px);
+      transform: scale(1.02); /* Card hover animation */
     }
     .status-updated    { border-left-color: var(--gradient-green-dark); }
     .status-notupdated { border-left-color: var(--gradient-red-dark); }
@@ -317,7 +316,7 @@
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
-      transition: transform 0.3s ease, stroke 0.2s ease;
+      transition: transform 0.2s ease, stroke 0.2s ease;
     }
     .item-header.open .chevron {
       transform: rotate(90deg);
@@ -342,7 +341,7 @@
       border-top: 1px solid var(--card-border);
       padding: 0 20px;
       overflow: hidden;
-      transition: max-height 0.4s ease, opacity 0.3s ease, padding-top 0.4s ease, padding-bottom 0.4s ease;
+      transition: max-height 0.3s ease, opacity 0.2s ease, padding-top 0.3s ease, padding-bottom 0.3s ease;
     }
     .item-body.show {
       max-height: 600px;
@@ -358,6 +357,13 @@
       object-fit: contain;
       margin-bottom: 16px;
       border-radius: 4px;
+    }
+    .no-preview {
+      width: 100%;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-bottom: 16px;
     }
 
     /* BANNER AND DISCLAIMER */
@@ -437,7 +443,7 @@
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.2s ease;
       z-index: 200;
     }
     .modal-overlay.show {
@@ -454,10 +460,12 @@
       flex-direction: column;
       overflow: hidden;
       transform: scale(0.9);
-      transition: transform 0.3s ease;
+      transition: transform 0.2s ease, opacity 0.2s ease; /* Modal open animation */
+      opacity: 0;
     }
     .modal-overlay.show .modal-content {
       transform: scale(1);
+      opacity: 1;
     }
     @media (max-width: 600px) {
       .modal-content {
@@ -516,7 +524,7 @@
 </head>
 <body>
   <nav class="navbar">
-    <img src="path/to/your-r-logo.png" alt="R Logo" class="site-logo" /> <!-- Replace with your "R" logo file -->
+    <img src="https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/5DB63475-7C5E-4925-9919-13A58DABC9AC.png" alt="Rendex Logo" class="site-logo" />
     <div class="search-container">
       <input id="searchInput" type="search" placeholder="Search..." aria-label="Search exploits" />
     </div>
@@ -526,7 +534,7 @@
         <span>Theme</span>
         <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" /></svg>
       </button>
-      <div class="theme-panel" id="themePanel">
+      <div class="theme-dropdown" id="themeDropdown">
         <button onclick="setTheme('dark')" aria-label="Switch to dark theme">Dark</button>
         <button onclick="setTheme('light')" aria-label="Switch to light theme">Light</button>
       </div>
@@ -553,9 +561,9 @@
         </div>
         <div class="item-subheader">Last updated: 05/22/2025 at 8:09 PM UTC</div>
         <div class="item-body">
-          <img src="path/to/codex-preview.jpg" alt="Codex Preview" class="item-preview" /> <!-- Replace with Codex screenshot -->
+          <div class="no-preview">Preview is not available at the moment</div>
           <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
-            Codex is the premier Roblox script executor for iOS and Android, offering a vast Script Hub and seamless cross-platform support.
+            Codex is a top-notch Roblox script executor for iOS and Android, packed with a huge Script Hub and smooth platform support.
           </p>
           <div class="card-banner-inner">Detected by Hyperion</div>
           <div class="download-disclaimer">
@@ -598,9 +606,9 @@
         </div>
         <div class="item-subheader">Last updated: 09/02/2025 at 8:00 PM UTC</div>
         <div class="item-body">
-          <img src="path/to/delta-preview.jpg" alt="Delta Preview" class="item-preview" /> <!-- Replace with Delta screenshot -->
+          <img src="https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0496.png" alt="Delta Preview" class="item-preview" />
           <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
-            Delta revolutionizes Roblox scripting with its Gloopintosh engine, offering a premium experience, fast updates, and top performance for free.
+            Delta takes Roblox scripting to the next level with its Gloopintosh engine, giving you a premium feel, quick updates, and solid performance—all for free!
           </p>
           <div class="card-banner-inner">Detected by Hyperion</div>
           <div class="download-disclaimer">
@@ -651,9 +659,9 @@
         </div>
         <div class="item-subheader">Last updated: 09/02/2025 at 8:59 PM UTC</div>
         <div class="item-body">
-          <img src="path/to/codex-preview.jpg" alt="Codex Preview" class="item-preview" /> <!-- Replace with Codex screenshot -->
+          <div class="no-preview">Preview is not available at the moment</div>
           <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
-            Codex is the premier Roblox script executor for iOS and Android, offering a vast Script Hub and seamless cross-platform support.
+            Codex is a top-notch Roblox script executor for iOS and Android, packed with a huge Script Hub and smooth platform support.
           </p>
           <div class="card-banner-inner">Detected by Hyperion</div>
           <div class="download-disclaimer">
@@ -700,9 +708,9 @@
         </div>
         <div class="item-subheader">Last updated: 09/02/2025 at 8:00 PM UTC</div>
         <div class="item-body">
-          <img src="path/to/delta-preview.jpg" alt="Delta Preview" class="item-preview" /> <!-- Replace with Delta screenshot -->
+          <img src="https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0496.png" alt="Delta Preview" class="item-preview" />
           <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
-            Delta revolutionizes Roblox scripting with its Gloopintosh engine, offering a premium experience, fast updates, and top performance for free.
+            Delta takes Roblox scripting to the next level with its Gloopintosh engine, giving you a premium feel, quick updates, and solid performance—all for free!
           </p>
           <div class="card-banner-inner">Detected by Hyperion</div>
           <div class="download-disclaimer">
@@ -749,9 +757,9 @@
         </div>
         <div class="item-subheader">Last updated: 09/02/2025 at 8:00 PM UTC</div>
         <div class="item-body">
-          <img src="path/to/ronix-preview.jpg" alt="Ronix Preview" class="item-preview" /> <!-- Replace with Ronix screenshot -->
+          <div class="no-preview">Preview is not available at the moment</div>
           <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
-            Ronix offers a powerful and reliable script execution platform for Android, with advanced bypass techniques and cloud-integrated script management.
+            Ronix delivers a powerful and reliable script executor for Android, with slick bypass techniques and cloud-based script management.
           </p>
           <div class="card-banner-inner">Detected by Hyperion</div>
           <div class="download-disclaimer">
@@ -785,10 +793,10 @@
 
     <div class="category-heading">Frequently Asked Questions</div>
     <section class="faq-list">
-      <p><strong>Is Delta free?</strong> Yes, Delta is completely free by default, with no mandatory payments.</p>
-      <p><strong>Does Ronix require payment?</strong> No, Ronix is free, though you may encounter ads to support the creator.</p>
-      <p><strong>What is an .apk file?</strong> It’s the file type used for Android apps.</p>
-      <p><strong>Where can I get support for Ronix?</strong> Check the Discord server or ask for help there; support is a privilege.</p>
+      <p><strong>Is Delta free?</strong> Yep, Delta’s totally free—no catch, just enjoy it!</p>
+      <p><strong>Do I have to pay for Ronix?</strong> Nah, it’s free too, though you might see some ads to keep it running.</p>
+      <p><strong>What’s an .apk file?</strong> Just the file type for Android apps—pretty standard stuff.</p>
+      <p><strong>Where can I get help with Ronix?</strong> Jump on their Discord server; folks there can help out, though it’s not guaranteed.</p>
     </section>
   </div>
 
@@ -804,22 +812,22 @@
 
   <script>
     // Theme Toggle
-    let isPanelOpen = false;
+    let isDropdownOpen = false;
     const themeToggle = document.getElementById('themeToggle');
-    const themePanel = document.getElementById('themePanel');
+    const themeDropdown = document.getElementById('themeDropdown');
     themeToggle.addEventListener('click', () => {
-      isPanelOpen = !isPanelOpen;
-      themeToggle.classList.toggle('open', isPanelOpen);
-      themePanel.classList.toggle('open', isPanelOpen);
-      themeToggle.setAttribute('aria-expanded', isPanelOpen);
+      isDropdownOpen = !isDropdownOpen;
+      themeToggle.classList.toggle('open', isDropdownOpen);
+      themeDropdown.classList.toggle('open', isDropdownOpen);
+      themeToggle.setAttribute('aria-expanded', isDropdownOpen);
     });
 
     function setTheme(theme) {
       document.body.className = theme === 'dark' ? '' : 'light-theme';
       localStorage.setItem('theme', theme);
-      isPanelOpen = false;
+      isDropdownOpen = false;
       themeToggle.classList.remove('open');
-      themePanel.classList.remove('open');
+      themeDropdown.classList.remove('open');
       themeToggle.setAttribute('aria-expanded', 'false');
     }
     const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -862,6 +870,11 @@
       const modal = document.getElementById('suncModal');
       modal.classList.remove('show');
     }
+
+    // Initial Card Load
+    document.querySelectorAll('.exploit-item').forEach(card => {
+      card.style.opacity = '1';
+    });
   </script>
 </body>
 </html>
