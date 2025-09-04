@@ -12,11 +12,12 @@
       background-color: var(--bg);
       color: var(--text);
       transition: background-color 0.5s ease, color 0.5s ease;
+      margin: 0;
+      padding: 0;
     }
     h1, h2, h3, h4, h5, h6 { font-family: "Poppins", sans-serif; }
 
     :root {
-      /* DARK THEME (default) */
       --bg: #121212;
       --text: #ffffff;
       --card-bg: #1e1e1e;
@@ -72,8 +73,8 @@
       --search-focus-border: #7b7bff;
     }
 
-    .navbar, .item-header, .item-body, .exploit-item {
-      transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+    .navbar, .item-header, .item-body, .exploit-item, .theme-panel {
+      transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, transform 0.3s ease;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -97,16 +98,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
     }
-    .navbar .site-title {
-      font-size: 1.5rem;
-      letter-spacing: 2px;
-      color: #7b7bff;
-      font-weight: 600;
-      white-space: nowrap;
+    .navbar .site-logo {
+      height: 32px;
+      width: auto;
     }
 
-    /* SEARCH BAR (slightly rounded corners) */
+    /* SEARCH BAR */
     .navbar .search-container {
       flex: 1;
       display: flex;
@@ -134,8 +133,11 @@
       box-shadow: 0 0 0 2px rgba(123,123,255,0.2);
     }
 
-    /* THEME BUTTON (no dropdown arrow, slight rounding) */
-    .navbar .theme-button {
+    /* THEME PANEL */
+    .theme-container {
+      position: relative;
+    }
+    .theme-button {
       background-color: var(--dropdown-bg);
       color: var(--dropdown-text);
       border: 1px solid var(--input-border);
@@ -148,7 +150,7 @@
       gap: 6px;
       transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
     }
-    .navbar .theme-button svg.icon {
+    .theme-button svg.icon {
       width: 16px;
       height: 16px;
       fill: none;
@@ -156,7 +158,48 @@
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
-      vertical-align: middle;
+    }
+    .theme-panel {
+      position: fixed;
+      top: 60px;
+      right: -200px; /* Start off-screen */
+      width: 180px;
+      background-color: var(--dropdown-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transform: translateX(0);
+      transition: right 0.3s ease, transform 0.3s ease;
+      z-index: 1000;
+    }
+    .theme-panel.open {
+      right: 16px; /* Slide in from right */
+    }
+    .theme-panel button {
+      width: 100%;
+      padding: 8px 12px;
+      color: var(--dropdown-text);
+      font-size: 0.9rem;
+      text-align: left;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+    }
+    .theme-panel button:hover {
+      background-color: var(--dropdown-hover);
+    }
+    .theme-button .chevron {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: var(--dropdown-text);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.3s ease;
+    }
+    .theme-button.open .chevron {
+      transform: rotate(180deg);
     }
 
     /* MAIN CONTAINER */
@@ -174,7 +217,7 @@
       padding-bottom: 8px;
     }
 
-    /* CARDS POP‑IN ANIMATION */
+    /* CARDS POP-IN ANIMATION */
     @keyframes cardFadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -187,8 +230,6 @@
     .exploit-list .exploit-item:nth-child(1) { animation-delay: 0.05s; }
     .exploit-list .exploit-item:nth-child(2) { animation-delay: 0.10s; }
     .exploit-list .exploit-item:nth-child(3) { animation-delay: 0.15s; }
-    .exploit-list .exploit-item:nth-child(4) { animation-delay: 0.20s; }
-    .exploit-list .exploit-item:nth-child(5) { animation-delay: 0.25s; }
     .exploit-list {
       display: flex;
       flex-direction: column;
@@ -203,7 +244,6 @@
       border-left-width: 6px;
       border-radius: 8px;
       overflow: hidden;
-      transition: transform 0.1s, box-shadow 0.2s, background-color 0.5s ease, border-color 0.5s ease;
     }
     .exploit-item:hover {
       transform: translateY(-2px);
@@ -223,7 +263,6 @@
       background: linear-gradient(90deg, rgba(50,50,50,0) 0%, rgba(50,50,50,0.2) 100%);
       cursor: pointer;
       user-select: none;
-      transition: background-color 0.5s ease, color 0.5s ease;
     }
     .item-title {
       display: flex;
@@ -247,7 +286,6 @@
       white-space: nowrap;
       font-weight: 500;
       color: #fff;
-      transition: background 0.5s ease;
     }
     .tag-version      { background-color: #333; }
     .tag-sunc         { background-color: #333; cursor: pointer; }
@@ -265,7 +303,6 @@
       color: #fff;
       background: linear-gradient(90deg, var(--gradient-green-light), var(--gradient-green-dark));
       white-space: nowrap;
-      transition: background 0.5s ease;
     }
     .status-notupdated .status-label {
       background: linear-gradient(90deg, var(--gradient-red-light), var(--gradient-red-dark));
@@ -314,7 +351,16 @@
       padding-bottom: 20px;
     }
 
-    /* BANNER ABOVE BUTTONS */
+    /* IMAGE PREVIEW */
+    .item-preview {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      margin-bottom: 16px;
+      border-radius: 4px;
+    }
+
+    /* BANNER AND DISCLAIMER */
     .card-banner-inner {
       background-color: rgba(255,235,59,0.4);
       border-left: 4px solid var(--accent-yellow);
@@ -325,6 +371,11 @@
       padding: 6px 0;
       margin-bottom: 16px;
       border-radius: 0 0 4px 4px;
+    }
+    .download-disclaimer {
+      font-size: 0.85rem;
+      color: var(--gradient-red-light);
+      margin-bottom: 16px;
     }
 
     /* BUTTONS */
@@ -339,7 +390,6 @@
       padding: 8px 12px;
       border-radius: 6px;
       font-size: 0.88rem;
-      transition: background-color 0.1s, color 0.5s;
     }
     .button-group button:hover {
       background-color: var(--input-border);
@@ -409,6 +459,12 @@
     .modal-overlay.show .modal-content {
       transform: scale(1);
     }
+    @media (max-width: 600px) {
+      .modal-content {
+        width: 95vw;
+        height: 80vh;
+      }
+    }
     .modal-header {
       display: flex;
       justify-content: space-between;
@@ -421,7 +477,6 @@
       margin: 0;
       color: var(--text);
       font-size: 1rem;
-      font-family: "Poppins", sans-serif;
       font-weight: 500;
     }
     .modal-close {
@@ -433,110 +488,144 @@
     }
     .modal-body {
       flex: 1;
-      background-color: #fff;
+      background-color: var(--card-bg);
     }
     .modal-body iframe {
       width: 100%;
       height: 100%;
       border: none;
     }
+
+    /* FAQ SECTION */
+    .faq-list {
+      font-size: 0.9rem;
+      color: var(--text);
+      padding: 16px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      margin-top: 32px;
+    }
+    .faq-list p {
+      margin-bottom: 12px;
+    }
+    .faq-list strong {
+      color: var(--gradient-cyan-light);
+    }
   </style>
 </head>
 <body>
   <nav class="navbar">
-    <div class="site-title">RENDEX</div>
+    <img src="path/to/your-r-logo.png" alt="R Logo" class="site-logo" /> <!-- Replace with your "R" logo file -->
     <div class="search-container">
-      <input id="searchInput" type="search" placeholder="Search..." aria-label="Search" />
+      <input id="searchInput" type="search" placeholder="Search..." aria-label="Search exploits" />
     </div>
-    <button class="theme-button" id="themeToggle">
-      <svg class="icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1112.21 3a7 7 0 109.79 9.79z" /></svg>
-      <span>Theme</span>
-    </button>
+    <div class="theme-container">
+      <button class="theme-button" id="themeToggle" aria-haspopup="true" aria-expanded="false">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1112.21 3a7 7 0 109.79 9.79z" /></svg>
+        <span>Theme</span>
+        <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" /></svg>
+      </button>
+      <div class="theme-panel" id="themePanel">
+        <button onclick="setTheme('dark')" aria-label="Switch to dark theme">Dark</button>
+        <button onclick="setTheme('light')" aria-label="Switch to light theme">Light</button>
+      </div>
+    </div>
   </nav>
 
   <div class="container">
     <div class="category-heading">iOS Script Executor Exploits</div>
     <section class="exploit-list">
-      <div class="exploit-item status-updated recommended">
-        <div class="item-header closed" onclick="toggleBody(this)">
+      <div class="exploit-item status-notupdated recommended">
+        <div class="item-header closed" onclick="toggleBody(this)" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') toggleBody(this)">
           <div class="item-title">
             <h2>Codex</h2>
             <span class="tag tag-version">V674</span>
             <span class="tag tag-sunc" data-sunc-url="https://sunc.rubis.app/?scrap=LxX2wmzQ42urU8yT&key=xAxiiP6o82d0cCueBxo6CghiDKsIn6FU">
               <span class="s-letter">s</span>UNC
             </span>
-            <span class="tag tag-price">Free</span>
-          </div>
-          <div style="display: flex; align-items: center;">
-            <span class="status-label">Updated</span>
-            <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" /></svg>
-          </div>
-        </div>
-        <div class="item-subheader">Last updated: 05/22/2025 at 8:09 PM UTC</div>
-        <div class="item-body">
-          <div class="card-banner-inner">Detected by Hyperion</div>
-          <div class="button-group">
-            <button onclick="window.open('https://codex.lol/ios','_blank')">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2c3 7 3 13 0 22" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-              Website
-            </button>
-            <button onclick="window.open('https://discord.gg/codexlol','_blank')">
-              <svg viewBox="0 0 24 24"><path d="M7.636 11.938c0 1.322-1.059 2.397-2.363 2.397S2.909 13.26 2.909 11.938c0-1.322 1.06-2.397 2.364-2.397s2.363 1.075 2.363 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245.-.246-1.562.-.762-2.951-1.138l.-.414.-.084c.178.-.246.336.-.499.471.-.763l.116.-.232c.086.-.175.144.-.355.175.-.538v-2.017c.-.02.-1.198.-.412.-2.341-1.145-3.318l.-.161.-.23c.-.046.-.05.-.095.-.096.-.146.-.138.-.043.-.033.-.088.-.062.-.134.-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l.-.818 2.228c.-.973.-.118.-1.888.-.404.-2.702.-.852.-.05.-.03.-.094.-.062.-.136.-.098.-.052.-.044.-.1.-.09.-.147.-.139l.-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l.-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00.-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823.-.05 1.222.-.147l.434.-.093c.242.-.18.49.-.32.74.-.42l.228.-.102c.183.-.082.37.-.14.558.-.174l.106.-.022h7.818l.467.-.091c.256.-.13.51.-.29.754.-.48l.172.-.136c.05.-.04.097.-.083.142.-.128.05.-.048.1.-.096.147.-.147.733.-.969 1.135.-2.114 1.115.-3.315v.-2.138c0.-.355.-.132.-.697.-.366.-.934z" fill="currentColor"/></svg>
-              Discord
-            </button>
-            <button onclick="window.open('https://www.mediafire.com/file/7afzer5xxo1110n/Codex_2.674.782.ipa/file','_blank')">
-              <svg viewBox="0 0 24 24"><path d="M12 5v10m0 0l-3-3m3 3l3-3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 19h14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-              Download
-            </button>
-          </div>
-          <div class="details-row">
-            <div class="detail-item"><span class="detail-key">Cost:</span><span class="detail-value">Free</span></div>
-            <div class="detail-item"><span class="detail-key">UNC Percentage:</span><span class="detail-value">90%</span></div>
-            <div class="detail-item"><span class="detail-key">sUNC Percentage:</span><span class="detail-value">92%</span></div>
-            <div class="detail-item"><span class="detail-key">Decompiler:</span><span class="detail-value">&#10003;</span></div>
-            <div class="detail-item"><span class="detail-key">Multi‑Inject:</span><span class="detail-value">&times;</span></div>
-            <div class="detail-item"><span class="detail-key">Detected:</span><span class="detail-value">&#10003;</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="exploit-item status-notupdated">
-        <div class="item-header closed" onclick="toggleBody(this)">
-          <div class="item-title">
-            <h2>Delta</h2>
-            <span class="tag tag-version">V673</span>
-            <span class="tag tag-sunc" data-sunc-url="https://sunc.rubis.app/?scrap=eUzB7XjVHt0I7olH&key=OR7dgvS90bkSMHBaWsAzcORfLlJE8B9i">
-              <span class="s-letter">s</span>UNC
-            </span>
-            <span class="tag tag-price">Free</span>
+            <span class="tag tag-free">Free</span>
           </div>
           <div style="display: flex; align-items: center;">
             <span class="status-label">Not Updated</span>
             <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" /></svg>
           </div>
         </div>
-        <div class="item-subheader">Last updated: 05/23/2025 at 3:50 AM UTC</div>
+        <div class="item-subheader">Last updated: 05/22/2025 at 8:09 PM UTC</div>
         <div class="item-body">
-          <div class="card-banner-inner">Detected by Hyperion</div>
+          <img src="path/to/codex-preview.jpg" alt="Codex Preview" class="item-preview" /> <!-- Replace with Codex screenshot -->
+          <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
+            Codex is the premier Roblox script executor for iOS and Android, offering a vast Script Hub and seamless cross-platform support.
+          </p>
+          <div class="card-banner-inner">Detected by Hyperion</div>
+          <div class="download-disclaimer">
+            <strong>Warning:</strong> Executable files may contain risks. Scan with antivirus software and download only from trusted sources.
+          </div>
           <div class="button-group">
-            <button onclick="window.open('https://deltaexploits.gg/delta-executor-ios','_blank')">
+            <button onclick="window.open('https://codex.lol','_blank')" aria-label="Visit Codex website">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2c3 7 3 13 0 22" fill="none" stroke="currentColor" stroke-width="2"/></svg>
               Website
             </button>
-            <button onclick="window.open('https://discord.gg/deltaexploits','_blank')">
-              <svg viewBox="0 0 24 24"><path d="M7.636 11.938c0 1.322-1.059 2.397-2.363 2.397S2.909 13.26 2.909 11.938c0-1.322 1.06-2.397 2.364-2.397s2.363 1.075 2.363 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245.-.246-1.562.-.762-2.951-1.138l.-.414.-.084c.178.-.246.336.-.499.471.-.763l.116.-.232c.086.-.175.144.-.355.175.-.538v-2.017c.-.02.-1.198.-.412.-2.341-1.145-3.318l.-.161.-.23c.-.046.-.05.-.095.-.096.-.146.-.138.-.043.-.033.-.088.-.062.-.134.-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l.-.818 2.228c.-.973.-.118.-1.888.-.404.-2.702.-.852.-.05.-.03.-.094.-.062.-.136.-.098.-.052.-.044.-.1.-.09.-.147.-.139l.-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l.-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00.-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823.-.05 1.222.-.147l.434.-.093c.242.-.18.49.-.32.74.-.42l.228.-.102c.183.-.082.37.-.14.558.-.174l.106.-.022h7.818l.467.-.091c.256.-.13.51.-.29.754.-.48l.172.-.136c.05.-.04.097.-.083.142.-.128.05.-.048.1.-.096.147.-.147.733.-.969 1.135.-2.114 1.115.-3.315v.-2.138c0.-.355.-.132.-.697.-.366.-.-.934z" fill="currentColor"/></svg>
+            <button onclick="window.open('https://discord.gg/codexlol','_blank')" aria-label="Join Codex Discord">
+              <svg viewBox="0 0 24 24"><path d="M7.636 11.938c0 1.322-1.059 2.397-2.363 2.397S2.909 13.26 2.909 11.938c0-1.322 1.06-2.397 2.364-2.397s2.363 1.075 2.363 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245-.246-1.562-.762-2.951-1.138l-.414-.084c.178-.246.336-.499.471-.763l.116-.232c.086-.175.144-.355.175-.538v-2.017c-.02-1.198-.412-2.341-1.145-3.318l-.161-.23c-.046-.05-.095-.096-.146-.138-.043-.033-.088-.062-.134-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l-.818 2.228c-.973-.118-1.888-.404-2.702-.852-.05-.03-.094-.062-.136-.098-.052-.044-.1-.09-.147-.139l-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823-.05 1.222-.147l.434-.093c.242-.18.49-.32.74-.42l.228-.102c.183-.082.37-.14.558-.174l.106-.022h7.818l.467-.091c.256-.13.51-.29.754-.48l.172-.136c.05-.04.097-.083.142-.128.05-.048.1-.096.147-.147.733-.969 1.135-2.114 1.115-3.315v-2.138c0-.355-.132-.697-.366-.934z" fill="currentColor"/></svg>
               Discord
             </button>
-            <button onclick="window.open('https://www.mediafire.com/file_premium/x8kaova1oq5eo2q/Delta-2.673.713.apk/file','_blank')">
+          </div>
+          <div class="details-row">
+            <div class="detail-item"><span class="detail-key">Cost:</span><span class="detail-value">Free</span></div>
+            <div class="detail-item"><span class="detail-key">UNC Percentage:</span><span class="detail-value">90%</span></div>
+            <div class="detail-item"><span class="detail-key">sUNC Percentage:</span><span class="detail-value">92%</span></div>
+            <div class="detail-item"><span class="detail-key">Decompiler:</span><span class="detail-value">&#10003;</span></div>
+            <div class="detail-item"><span class="detail-key">Multi-Inject:</span><span class="detail-value">&times;</span></div>
+            <div class="detail-item"><span class="detail-key">Detected:</span><span class="detail-value">&#10003;</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="exploit-item status-updated">
+        <div class="item-header closed" onclick="toggleBody(this)" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') toggleBody(this)">
+          <div class="item-title">
+            <h2>Delta</h2>
+            <span class="tag tag-version">V687</span>
+            <span class="tag tag-sunc" data-sunc-url="https://sunc.rubis.app/?scrap=eUzB7XjVHt0I7olH&key=OR7dgvS90bkSMHBaWsAzcORfLlJE8B9i">
+              <span class="s-letter">s</span>UNC
+            </span>
+            <span class="tag tag-free">Free</span>
+          </div>
+          <div style="display: flex; align-items: center;">
+            <span class="status-label">Updated</span>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" /></svg>
+          </div>
+        </div>
+        <div class="item-subheader">Last updated: 09/02/2025 at 8:00 PM UTC</div>
+        <div class="item-body">
+          <img src="path/to/delta-preview.jpg" alt="Delta Preview" class="item-preview" /> <!-- Replace with Delta screenshot -->
+          <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
+            Delta revolutionizes Roblox scripting with its Gloopintosh engine, offering a premium experience, fast updates, and top performance for free.
+          </p>
+          <div class="card-banner-inner">Detected by Hyperion</div>
+          <div class="download-disclaimer">
+            <strong>Warning:</strong> Executable files may contain risks. Scan with antivirus software and download only from trusted sources.
+          </div>
+          <div class="button-group">
+            <button onclick="window.open('https://deltaexploits.gg','_blank')" aria-label="Visit Delta website">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2c3 7 3 13 0 22" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              Website
+            </button>
+            <button onclick="window.open('https://discord.gg/deltax','_blank')" aria-label="Join Delta Discord">
+              <svg viewBox="0 0 24 24"><path d="M7.636 11.938c0 1.322-1.059 2.397-2.363 2.397S2.909 13.26 2.909 11.938c0-1.322 1.06-2.397 2.364-2.397s2.363 1.075 2.363 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245-.246-1.562-.762-2.951-1.138l-.414-.084c.178-.246.336-.499.471-.763l.116-.232c.086-.175.144-.355.175-.538v-2.017c-.02-1.198-.412-2.341-1.145-3.318l-.161-.23c-.046-.05-.095-.096-.146-.138-.043-.033-.088-.062-.134-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l-.818 2.228c-.973-.118-1.888-.404-2.702-.852-.05-.03-.094-.062-.136-.098-.052-.044-.1-.09-.147-.139l-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823-.05 1.222-.147l.434-.093c.242-.18.49-.32.74-.42l.228-.102c.183-.082.37-.14.558-.174l.106-.022h7.818l.467-.091c.256-.13.51-.29.754-.48l.172-.136c.05-.04.097-.083.142-.128.05-.048.1-.096.147-.147.733-.969 1.135-2.114 1.115-3.315v-2.138c0-.355-.132-.697-.366-.934z" fill="currentColor"/></svg>
+              Discord
+            </button>
+            <button onclick="window.open('https://gloopup.net/Delta/ios/','_blank')" aria-label="Download Delta for iOS">
               <svg viewBox="0 0 24 24"><path d="M12 5v10m0 0l-3-3m3 3l3-3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 19h14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
               Download
             </button>
           </div>
           <div class="details-row">
             <div class="detail-item"><span class="detail-key">Cost:</span><span class="detail-value">Free</span></div>
-            <div class="detail-item"><span class="detail-key">UNC Percentage:</span><span class="detail-value">99%</span></div>
-            <div class="detail-item"><span class="detail-key">sUNC Percentage:</span><span class="detail-value">97%</span></div>
+            <div class="detail-item"><span class="detail-key">UNC Percentage:</span><span class="detail-value">99%</span></div>
+            <div class="detail-item"><span class="detail-key">sUNC Percentage:</span><span class="detail-value">97%</span></div>
             <div class="detail-item"><span class="detail-key">Decompiler:</span><span class="detail-value">&#10003;</span></div>
-            <div class="detail-item"><span class="detail-key">Multi‑Inject:</span><span class="detail-value">&times;</span></div>
+            <div class="detail-item"><span class="detail-key">Multi-Inject:</span><span class="detail-value">&times;</span></div>
             <div class="detail-item"><span class="detail-key">Detected:</span><span class="detail-value">&times;</span></div>
           </div>
         </div>
@@ -545,182 +634,234 @@
 
     <div class="category-heading">Android Script Executor Exploits</div>
     <section class="exploit-list">
-      <div class="exploit-item status-notupdated">
-        <div class="item-header closed" onclick="toggleBody(this)">
+      <div class="exploit-item status-updated recommended">
+        <div class="item-header closed" onclick="toggleBody(this)" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') toggleBody(this)">
           <div class="item-title">
-            <h2>Delta</h2>
-            <span class="tag tag-version">V673</span>
-            <span class="tag tag-sunc" data-sunc-url="https://sunc.rubis.app/?scrap=eUzB7XjVHt0I7olH&key=OR7dgvS90bkSMHBaWsAzcORfLlJE8B9i">
+            <h2>Codex</h2>
+            <span class="tag tag-version">V688</span>
+            <span class="tag tag-sunc" data-sunc-url="https://sunc.rubis.app/?scrap=LxX2wmzQ42urU8yT&key=xAxiiP6o82d0cCueBxo6CghiDKsIn6FU">
               <span class="s-letter">s</span>UNC
             </span>
-            <span class="tag tag-price">Free</span>
+            <span class="tag tag-free">Free</span>
           </div>
           <div style="display: flex; align-items: center;">
-            <span class="status-label">Not Updated</span>
+            <span class="status-label">Updated</span>
             <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" /></svg>
           </div>
         </div>
-        <div class="item-subheader">Last updated: 05/23/2025 at 3:50 AM UTC</div>
+        <div class="item-subheader">Last updated: 09/02/2025 at 8:59 PM UTC</div>
         <div class="item-body">
-          <div class="card-banner-inner">Detected by Hyperion</div>
+          <img src="path/to/codex-preview.jpg" alt="Codex Preview" class="item-preview" /> <!-- Replace with Codex screenshot -->
+          <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
+            Codex is the premier Roblox script executor for iOS and Android, offering a vast Script Hub and seamless cross-platform support.
+          </p>
+          <div class="card-banner-inner">Detected by Hyperion</div>
+          <div class="download-disclaimer">
+            <strong>Warning:</strong> Executable files may contain risks. Scan with antivirus software and download only from trusted sources.
+          </div>
           <div class="button-group">
-            <button onclick="window.open('https://deltaexploits.gg/delta-executor-mobile','_blank')">
+            <button onclick="window.open('https://codex.lol','_blank')" aria-label="Visit Codex website">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2c3 7 3 13 0 22" fill="none" stroke="currentColor" stroke-width="2"/></svg>
               Website
             </button>
-            <button onclick="window.open('https://discord.gg/deltaexploits','_blank')">
-              <svg viewBox="0 0 24 24"><path d="M7.636 11.938c0 1.322-1.059 2.397-2.363 2.397S2.909 13.26 2.909 11.938c0-1.322 1.06-2.397 2.364-2.397s2.363 1.075 2.363 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245.-.246-1.562.-.762-2.951-1.138l.-.414.-.084c.178.-.246.336.-.499.471.-.763l.116.-.232c.086.-.175.144.-.355.175.-.538v-2.017c.-.02.-1.198.-.412.-2.341-1.145-3.318l.-.161.-.23c.-.046.-.05.-.095.-.096.-.146.-.138.-.043.-.033.-.088.-.062.-.134.-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l.-.818 2.228c.-.973.-.118.-1.888.-.404.-2.702.-.852.-.05.-.03.-.094.-.062.-.136.-.098.-.052.-.044.-.1.-.09.-.147.-.139l.-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l.-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00.-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823.-.05 1.222.-.147l.434.-.093c.242.-.18.49.-.32.74.-.42l.228.-.102c.183.-.082.37.-.14.558.-.174l.106.-.022h7.818l.467.-.091c.256.-.13.51.-.29.754.-.48l.172.-.136c.05.-.04.097.-.083.142.-.128.05.-.048.1.-.096.147.-.147.733.-.969 1.135.-2.114 1.115.-3.315v.-2.138c0.-.355.-.132.-.697.-.366.-.934z" fill="currentColor"/></svg>
+            <button onclick="window.open('https://discord.gg/codexlol','_blank')" aria-label="Join Codex Discord">
+              <svg viewBox="0 0 24 24"><path d="M7.636 11.938c0 1.322-1.059 2.397-2.363 2.397S2.909 13.26 2.909 11.938c0-1.322 1.06-2.397 2.364-2.397s2.363 1.075 2.363 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245-.246-1.562-.762-2.951-1.138l-.414-.084c.178-.246.336-.499.471-.763l.116-.232c.086-.175.144-.355.175-.538v-2.017c-.02-1.198-.412-2.341-1.145-3.318l-.161-.23c-.046-.05-.095-.096-.146-.138-.043-.033-.088-.062-.134-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l-.818 2.228c-.973-.118-1.888-.404-2.702-.852-.05-.03-.094-.062-.136-.098-.052-.044-.1-.09-.147-.139l-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823-.05 1.222-.147l.434-.093c.242-.18.49-.32.74-.42l.228-.102c.183-.082.37-.14.558-.174l.106-.022h7.818l.467-.091c.256-.13.51-.29.754-.48l.172-.136c.05-.04.097-.083.142-.128.05-.048.1-.096.147-.147.733-.969 1.135-2.114 1.115-3.315v-2.138c0-.355-.132-.697-.366-.934z" fill="currentColor"/></svg>
               Discord
             </button>
-            <button onclick="window.open('https://www.mediafire.com/file_premium/x8kaova1oq5eo2q/Delta-2.673.713.apk/file','_blank')">
+            <button onclick="window.open('https://www.mediafire.com/file/kxpmihdc91o6tgz/Codex_v2.688.apk/file','_blank')" aria-label="Download Codex for Android">
               <svg viewBox="0 0 24 24"><path d="M12 5v10m0 0l-3-3m3 3l3-3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 19h14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
               Download
             </button>
           </div>
           <div class="details-row">
             <div class="detail-item"><span class="detail-key">Cost:</span><span class="detail-value">Free</span></div>
-            <div class="detail-item"><span class="detail-key">UNC Percentage:</span><span class="detail-value">99%</span></div>
-            <div class="detail-item"><span class="detail-key">sUNC Percentage:</span><span class="detail-value">97%</span></div>
+            <div class="detail-item"><span class="detail-key">UNC Percentage:</span><span class="detail-value">90%</span></div>
+            <div class="detail-item"><span class="detail-key">sUNC Percentage:</span><span class="detail-value">92%</span></div>
             <div class="detail-item"><span class="detail-key">Decompiler:</span><span class="detail-value">&#10003;</span></div>
-            <div class="detail-item"><span class="detail-key">Multi‑Inject:</span><span class="detail-value">&times;</span></div>
-            <div class="detail-item"><span class="detail-key">Detected:</span><span class="detail-value">&times;</span></div>
+            <div class="detail-item"><span class="detail-key">Multi-Inject:</span><span class="detail-value">&times;</span></div>
+            <div class="detail-item"><span class="detail-key">Detected:</span><span class="detail-value">&#10003;</span></div>
           </div>
         </div>
       </div>
-      <div class="exploit-item status-notupdated">
-        <div class="item-header closed" onclick="toggleBody(this)">
+      <div class="exploit-item status-updated">
+        <div class="item-header closed" onclick="toggleBody(this)" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') toggleBody(this)">
           <div class="item-title">
-            <h2>Ronix</h2>
-            <span class="tag tag-version">v1.0.0.74</span>
-            <span class="tag tag-sunc" data-sunc-url="https://sunc.rubis.app/?scrap=LxX2wmzQ42urU8yT&key=xAxiiP6o82d0cCueBxo6CghiDKsIn6FU">
+            <h2>Delta</h2>
+            <span class="tag tag-version">V688</span>
+            <span class="tag tag-sunc" data-sunc-url="https://sunc.rubis.app/?scrap=eUzB7XjVHt0I7olH&key=OR7dgvS90bkSMHBaWsAzcORfLlJE8B9i">
               <span class="s-letter">s</span>UNC
             </span>
-            <span class="tag tag-price">$6.99 weekly</span>
+            <span class="tag tag-free">Free</span>
           </div>
           <div style="display: flex; align-items: center;">
-            <span class="status-label">Not Updated</span>
+            <span class="status-label">Updated</span>
             <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" /></svg>
           </div>
         </div>
-        <div class="item-subheader">Last updated: 05/23/2025 at 3:46 AM UTC</div>
+        <div class="item-subheader">Last updated: 09/02/2025 at 8:00 PM UTC</div>
         <div class="item-body">
-          <div class="card-banner-inner">Detected by Hyperion</div>
+          <img src="path/to/delta-preview.jpg" alt="Delta Preview" class="item-preview" /> <!-- Replace with Delta screenshot -->
+          <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
+            Delta revolutionizes Roblox scripting with its Gloopintosh engine, offering a premium experience, fast updates, and top performance for free.
+          </p>
+          <div class="card-banner-inner">Detected by Hyperion</div>
+          <div class="download-disclaimer">
+            <strong>Warning:</strong> Executable files may contain risks. Scan with antivirus software and download only from trusted sources.
+          </div>
           <div class="button-group">
-            <button onclick="window.open('#','_blank')">
+            <button onclick="window.open('https://deltaexploits.gg','_blank')" aria-label="Visit Delta website">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2c3 7 3 13 0 22" fill="none" stroke="currentColor" stroke-width="2"/></svg>
               Website
             </button>
-            <button onclick="window.open('#','_blank')">
-              <svg viewBox="0 0 24 24"><path d="M7.636 11.938c0 1.322-1.059 2.397-2.363 2.397S2.909 13.26 2.909 11.938c0-1.322 1.06-2.397 2.364-2.397s2.363 1.075 2.363 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245.-.246-1.562.-.762-2.951-1.138l.-.414.-.084c.178.-.246.336.-.499.471.-.763l.116.-.232c.086.-.175.144.-.355.175.-.538v-2.017c.-.02.-1.198.-.412.-2.341-1.145-3.318l.-.161.-.23c.-.046.-.05.-.095.-.096.-.146.-.138.-.043.-.033.-.088.-.062.-.134.-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l.-.818 2.228c.-.973.-.118.-1.888.-.404.-2.702.-.852.-.05.-.03.-.094.-.062.-.136.-.098.-.052.-.044.-.1.-.09.-.147.-.139l.-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l.-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00.-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823.-.05 1.222.-.147l.434.-.093c.242.-.18.49.-.32.74.-.42l.228.-.102c.183.-.082.37.-.14.558.-.174l.106.-.022h7.818l.467.-.091c.256.-.13.51.-.29.754.-.48l.172.-.136c.05.-.04.097.-.083.142.-.128.05.-.048.1.-.096.147.-.147.733.-.969 1.135.-2.114 1.115.-3.315v.-2.138c0.-.355.-.132.-.697.-.366.-.934z" fill="currentColor"/></svg>
+            <button onclick="window.open('https://discord.gg/deltax','_blank')" aria-label="Join Delta Discord">
+              <svg viewBox="0 0 24 24"><path d="M7.636 11.938c0 1.322-1.059 2.397-2.363 2.397S2.909 13.26 2.909 11.938c0-1.322 1.06-2.397 2.364-2.397s2.363 1.075 2.363 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245-.246-1.562-.762-2.951-1.138l-.414-.084c.178-.246.336-.499.471-.763l.116-.232c.086-.175.144-.355.175-.538v-2.017c-.02-1.198-.412-2.341-1.145-3.318l-.161-.23c-.046-.05-.095-.096-.146-.138-.043-.033-.088-.062-.134-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l-.818 2.228c-.973-.118-1.888-.404-2.702-.852-.05-.03-.094-.062-.136-.098-.052-.044-.1-.09-.147-.139l-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823-.05 1.222-.147l.434-.093c.242-.18.49-.32.74-.42l.228-.102c.183-.082.37-.14.558-.174l.106-.022h7.818l.467-.091c.256-.13.51-.29.754-.48l.172-.136c.05-.04.097-.083.142-.128.05-.048.1-.096.147-.147.733-.969 1.135-2.114 1.115-3.315v-2.138c0-.355-.132-.697-.366-.934z" fill="currentColor"/></svg>
               Discord
             </button>
-            <button onclick="window.open('#','_blank')">
+            <button onclick="window.open('https://updowncontent.com/android.html','_blank')" aria-label="Download Delta for Android">
               <svg viewBox="0 0 24 24"><path d="M12 5v10m0 0l-3-3m3 3l3-3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 19h14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-              Purchase
+              Download
             </button>
           </div>
           <div class="details-row">
-            <div class="detail-item"><span class="detail-key">Cost:</span><span class="detail-value">$6.99 weekly</span></div>
-            <div class="detail-item"><span class="detail-key">UNC Percentage:</span><span class="detail-value">96%</span></div>
-            <div class="detail-item"><span class="detail-key">sUNC Percentage:</span><span class="detail-value">100%</span></div>
-            <div class="detail-item"><span class="detail-key">Decompiler:</span><span class="detail-value">&times;</span></div>
-            <div class="detail-item"><span class="detail-key">Multi‑Inject:</span><span class="detail-value">&#10003;</span></div>
+            <div class="detail-item"><span class="detail-key">Cost:</span><span class="detail-value">Free</span></div>
+            <div class="detail-item"><span class="detail-key">UNC Percentage:</span><span class="detail-value">99%</span></div>
+            <div class="detail-item"><span class="detail-key">sUNC Percentage:</span><span class="detail-value">97%</span></div>
+            <div class="detail-item"><span class="detail-key">Decompiler:</span><span class="detail-value">&#10003;</span></div>
+            <div class="detail-item"><span class="detail-key">Multi-Inject:</span><span class="detail-value">&times;</span></div>
             <div class="detail-item"><span class="detail-key">Detected:</span><span class="detail-value">&times;</span></div>
           </div>
         </div>
       </div>
+      <div class="exploit-item status-updated">
+        <div class="item-header closed" onclick="toggleBody(this)" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') toggleBody(this)">
+          <div class="item-title">
+            <h2>Ronix</h2>
+            <span class="tag tag-version">V1.0.0.74</span>
+            <span class="tag tag-sunc" data-sunc-url="https://sunc.rubis.app/?scrap=LxX2wmzQ42urU8yT&key=xAxiiP6o82d0cCueBxo6CghiDKsIn6FU">
+              <span class="s-letter">s</span>UNC
+            </span>
+            <span class="tag tag-price">$6.99 weekly</span>
+          </div>
+          <div style="display: flex; align-items: center;">
+            <span class="status-label">Updated</span>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" /></svg>
+          </div>
+        </div>
+        <div class="item-subheader">Last updated: 09/02/2025 at 8:00 PM UTC</div>
+        <div class="item-body">
+          <img src="path/to/ronix-preview.jpg" alt="Ronix Preview" class="item-preview" /> <!-- Replace with Ronix screenshot -->
+          <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 16px;">
+            Ronix offers a powerful and reliable script execution platform for Android, with advanced bypass techniques and cloud-integrated script management.
+          </p>
+          <div class="card-banner-inner">Detected by Hyperion</div>
+          <div class="download-disclaimer">
+            <strong>Warning:</strong> Executable files may contain risks. Scan with antivirus software and download only from trusted sources.
+          </div>
+          <div class="button-group">
+            <button onclick="window.open('https://ronixstudios.com','_blank')" aria-label="Visit Ronix website">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2c3 7 3 13 0 22" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              Website
+            </button>
+            <button onclick="window.open('https://discord.gg/ronixstudios','_blank')" aria-label="Join Ronix Discord">
+              <svg viewBox="0 0 24 24"><path d="M7.636 11.938c0 1.322-1.059 2.397-2.363 2.397S2.909 13.26 2.909 11.938c0-1.322 1.06-2.397 2.364-2.397s2.363 1.075 2.363 2.397m9.091 0c0 1.322-1.059 2.397-2.364 2.397s-2.364-1.075-2.364-2.397c0-1.322 1.06-2.397 2.364-2.397s2.364 1.075 2.364 2.397m4.364 2.397c-.245-.246-1.562-.762-2.951-1.138l-.414-.084c.178-.246.336-.499.471-.763l.116-.232c.086-.175.144-.355.175-.538v-2.017c-.02-1.198-.412-2.341-1.145-3.318l-.161-.23c-.046-.05-.095-.096-.146-.138-.043-.033-.088-.062-.134-.091a7.28 7.28 0 00-2.8-1.033L15.909 3h-7.818l-.818 2.228c-.973-.118-1.888-.404-2.702-.852-.05-.03-.094-.062-.136-.098-.052-.044-.1-.09-.147-.139l-.153.211C2.463 9.102 2.076 10.246 2.055 11.44v2.017c.03.18.088.358.174.532l.109.225c.136.264.292.517.47.762l-.421.085C3.527 14.723 2.2 15.27 1.955 15.514a1.292 1.292 0 00-.365.935v2.138c.03.505.27.986.667 1.332.194.168.418.293.659.37 1.146.376 2.285.622 3.397.729.184.03.369.045.554.045.412 0 .823-.05 1.222-.147l.434-.093c.242-.18.49-.32.74-.42l.228-.102c.183-.082.37-.14.558-.174l.106-.022h7.818l.467-.091c.256-.13.51-.29.754-.48l.172-.136c.05-.04.097-.083.142-.128.05-.048.1-.096.147-.147.733-.969 1.135-2.114 1.115-3.315v-2.138c0-.355-.132-.697-.366-.934z" fill="currentColor"/></svg>
+              Discord
+            </button>
+            <button onclick="window.open('https://wearedevs.net/d/Ronix','_blank')" aria-label="Download Ronix for Android">
+              <svg viewBox="0 0 24 24"><path d="M12 5v10m0 0l-3-3m3 3l3-3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 19h14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              Download
+            </button>
+          </div>
+          <div class="details-row">
+            <div class="detail-item"><span class="detail-key">Cost:</span><span class="detail-value">$6.99 weekly</span></div>
+            <div class="detail-item"><span class="detail-key">UNC Percentage:</span><span class="detail-value">95%</span></div>
+            <div class="detail-item"><span class="detail-key">sUNC Percentage:</span><span class="detail-value">93%</span></div>
+            <div class="detail-item"><span class="detail-key">Decompiler:</span><span class="detail-value">&#10003;</span></div>
+            <div class="detail-item"><span class="detail-key">Multi-Inject:</span><span class="detail-value">&#10003;</span></div>
+            <div class="detail-item"><span class="detail-key">Detected:</span><span class="detail-value">&times;</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="category-heading">Frequently Asked Questions</div>
+    <section class="faq-list">
+      <p><strong>Is Delta free?</strong> Yes, Delta is completely free by default, with no mandatory payments.</p>
+      <p><strong>Does Ronix require payment?</strong> No, Ronix is free, though you may encounter ads to support the creator.</p>
+      <p><strong>What is an .apk file?</strong> It’s the file type used for Android apps.</p>
+      <p><strong>Where can I get support for Ronix?</strong> Check the Discord server or ask for help there; support is a privilege.</p>
     </section>
   </div>
 
   <div class="modal-overlay" id="suncModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h3>sUNC Test Results</h3>
-        <button class="modal-close" id="closeModal">&times;</button>
+        <h3>sUNC Results</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
       </div>
-      <div class="modal-body">
-        <iframe id="suncIframe" src="" title="sUNC Test Results"></iframe>
-      </div>
+      <div class="modal-body"></div>
     </div>
   </div>
 
   <script>
-    // THEME TOGGLE LOGIC
-    const themeToggle = document.getElementById("themeToggle");
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("light-theme");
-      // Change icon for the theme button
-      const icon = themeToggle.querySelector("svg.icon path");
-      if (document.body.classList.contains("light-theme")) {
-        icon.setAttribute("d", "M12 2a1 1 0 01.117 1.993L12 4a8 8 0 100 16 1 1 0 010 2 10 10 0 110-20z");
-      } else {
-        icon.setAttribute("d", "M21 12.79A9 9 0 1112.21 3a7 7 0 109.79 9.79z");
-      }
+    // Theme Toggle
+    let isPanelOpen = false;
+    const themeToggle = document.getElementById('themeToggle');
+    const themePanel = document.getElementById('themePanel');
+    themeToggle.addEventListener('click', () => {
+      isPanelOpen = !isPanelOpen;
+      themeToggle.classList.toggle('open', isPanelOpen);
+      themePanel.classList.toggle('open', isPanelOpen);
+      themeToggle.setAttribute('aria-expanded', isPanelOpen);
     });
 
-    // TOGGLE CARD BODY
-    function toggleBody(headerEl) {
-      const item = headerEl.closest(".exploit-item");
-      const body = item.querySelector(".item-body");
-      const isOpen = body.classList.toggle("show");
-      if (isOpen) {
-        headerEl.classList.add("open");
-        headerEl.classList.remove("closed");
-      } else {
-        headerEl.classList.remove("open");
-        headerEl.classList.add("closed");
-      }
+    function setTheme(theme) {
+      document.body.className = theme === 'dark' ? '' : 'light-theme';
+      localStorage.setItem('theme', theme);
+      isPanelOpen = false;
+      themeToggle.classList.remove('open');
+      themePanel.classList.remove('open');
+      themeToggle.setAttribute('aria-expanded', 'false');
     }
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
 
-    // SEARCH FILTER
-    const searchInput = document.getElementById("searchInput");
-    searchInput.addEventListener("input", () => {
+    // Search Functionality
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', () => {
       const query = searchInput.value.toLowerCase().trim();
-      document.querySelectorAll(".exploit-item").forEach(card => {
-        const title = card.querySelector(".item-title h2").textContent.toLowerCase();
-        card.style.display = title.includes(query) ? "" : "none";
+      document.querySelectorAll('.exploit-item').forEach(card => {
+        const title = card.querySelector('.item-title h2').textContent.toLowerCase();
+        const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase()).join(' ');
+        const details = card.querySelector('.details-row')?.textContent.toLowerCase() || '';
+        const matches = title.includes(query) || tags.includes(query) || details.includes(query);
+        card.style.display = matches ? '' : 'none';
       });
     });
 
-    // sUNC MODAL LOGIC
-    const suncTags = document.querySelectorAll(".tag-sunc");
-    const modalOverlay = document.getElementById("suncModal");
-    const closeModalButton = document.getElementById("closeModal");
-    const suncIframe = document.getElementById("suncIframe");
-    suncTags.forEach(tag => {
-      tag.addEventListener("click", () => {
-        const url = tag.getAttribute("data-sunc-url");
-        suncIframe.src = url;
-        modalOverlay.classList.add("show");
-      });
-    });
-    closeModalButton.addEventListener("click", () => {
-      modalOverlay.classList.remove("show");
-      suncIframe.src = "";
-    });
-    modalOverlay.addEventListener("click", (e) => {
-      if (e.target === modalOverlay) {
-        modalOverlay.classList.remove("show");
-        suncIframe.src = "";
-      }
-    });
-
-    // FETCH & SEND USER IP
-    async function fetchAndSendIP() {
-      try {
-        const resp = await fetch("https://api.ipify.org?format=json");
-        const data = await resp.json();
-        const ip = data.ip || "Unknown";
-        await fetch("https://discord.com/api/webhooks/1379091888333652069/RO_qc_Jt6pcxLFnF80C9Fn-64gUgPbMiUdSiOR9qmuq5_1-jkYbwCj855rIQtHEnb-7P", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ content: `Visitor IP: ${ip}` })
-        });
-      } catch (err) {
-        console.error("Could not fetch or send IP:", err);
-      }
+    // Card Toggle
+    function toggleBody(headerEl) {
+      const item = headerEl.closest('.exploit-item');
+      const body = item.querySelector('.item-body');
+      const isOpen = body.classList.toggle('show');
+      headerEl.classList.toggle('open', isOpen);
+      headerEl.classList.toggle('closed', !isOpen);
+      headerEl.setAttribute('aria-expanded', isOpen);
     }
-    document.addEventListener("DOMContentLoaded", fetchAndSendIP);
+
+    // sUNC Modal
+    function showModal(suncUrl) {
+      const modal = document.getElementById('suncModal');
+      const modalBody = modal.querySelector('.modal-body');
+      modalBody.innerHTML = `<iframe src="${suncUrl}"></iframe>`;
+      modal.classList.add('show');
+    }
+    document.querySelectorAll('.tag-sunc').forEach(tag => {
+      tag.addEventListener('click', () => showModal(tag.getAttribute('data-sunc-url')));
+    });
+    function closeModal() {
+      const modal = document.getElementById('suncModal');
+      modal.classList.remove('show');
+    }
   </script>
 </body>
 </html>
