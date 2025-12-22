@@ -701,15 +701,14 @@
     </div>
 
     <script>
-        // Copy script to clipboard - NOW USING YOUR SECURE ENDPOINT
-        document.getElementById('getScriptBtn').addEventListener('click', function() {
-            const script = 'loadstring(game:HttpGet("https://yourwebsite.com/loader.php"))()';
-            navigator.clipboard.writeText(script).then(() => {
-                showNotification();
-            }).catch(err => {
-                console.error('Failed to copy script: ', err);
-            });
-        });
+document.getElementById('getScriptBtn').addEventListener('click', function() {
+    const script = 'loadstring(game:HttpGet("https://rendex-cc.netlify.app/loader.lua"))()';
+    navigator.clipboard.writeText(script).then(() => {
+        showNotification();
+    }).catch(err => {
+        console.error('Failed to copy script: ', err);
+    });
+});
         
         document.getElementById('discordBtn').addEventListener('click', function() {
             window.open('https://discord.gg/X4GW8N5GdW', '_blank');
