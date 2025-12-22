@@ -12,6 +12,9 @@
             --accent: #009eff;
             --grid: rgba(255, 255, 255, 0.05);
             --tab-active: #1e1e24;
+            --button-bg: rgba(255, 255, 255, 0.05);
+            --button-border: rgba(255, 255, 255, 0.1);
+            --button-hover: rgba(255, 255, 255, 0.1);
         }
         
         * {
@@ -140,13 +143,13 @@
         }
         
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--button-bg);
             color: var(--text);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--button-border);
         }
         
         .btn:hover {
-            opacity: 0.9;
+            background: var(--button-hover);
         }
         
         .games-section {
@@ -184,7 +187,7 @@
         .game-image {
             width: 100%;
             height: 200px;
-            background: url('https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0614.webp?raw=true') no-repeat center center;
+            background: no-repeat center center;
             background-size: cover;
             position: relative;
         }
@@ -250,12 +253,19 @@
             padding: 20px;
             border-radius: 8px;
             display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .executor-header {
+            display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
         .executor-name {
             font-weight: 600;
+            font-size: 1.1rem;
         }
         
         .status {
@@ -274,141 +284,408 @@
         .status.red {
             color: #ef4444;
         }
+        
+        .executor-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .executor-link {
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .executor-link.discord {
+            background: var(--button-bg);
+            color: var(--text);
+            border: 1px solid var(--button-border);
+        }
+        
+        .executor-link.website {
+            background: var(--button-bg);
+            color: var(--text);
+            border: 1px solid var(--button-border);
+        }
+        
+        .executor-link:hover {
+            background: var(--button-hover);
+        }
+        
+        .executor-link svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="navbar">
-        <div class="nav-item active">Home</div>
-        <div class="nav-item">Games</div>
-        <div class="nav-item">Executors</div>
+        <div class="nav-item active" data-tab="home">Home</div>
+        <div class="nav-item" data-tab="games">Games</div>
+        <div class="nav-item" data-tab="executors">Executors</div>
     </div>
     
     <div class="content">
-        <div class="logo-container">
-            <div class="logo"></div>
-        </div>
-        
-        <div class="tagline">
-            The only script hub you'll ever need, experience the most feature-packed, high-quality script hub!
-        </div>
-        
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 21v-2a4 4 0 0 0-5-5"/>
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M12 10h.01"/>
-                        <path d="M12 14h.01"/>
-                    </svg>
-                </div>
-                <div class="stat-value">100+</div>
-                <div class="stat-label">Active Users</div>
+        <div id="home" class="section active">
+            <div class="logo-container">
+                <div class="logo"></div>
             </div>
             
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
-                    </svg>
-                </div>
-                <div class="stat-value">24/7</div>
-                <div class="stat-label">Uptime</div>
+            <div class="tagline">
+                The only script hub you'll ever need, experience the most feature-packed, high-quality script hub!
             </div>
             
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
-                        <line x1="12" y1="6" x2="12" y2="6"/>
-                        <line x1="12" y1="18" x2="12" y2="18"/>
-                        <line x1="6" y1="12" x2="6" y2="12"/>
-                        <line x1="18" y1="12" x2="18" y2="12"/>
-                        <circle cx="12" cy="12" r="2"/>
-                    </svg>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-5-5"/>
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 10h.01"/>
+                            <path d="M12 14h.01"/>
+                        </svg>
+                    </div>
+                    <div class="stat-value">100+</div>
+                    <div class="stat-label">Active Users</div>
                 </div>
-                <div class="stat-value">6+</div>
-                <div class="stat-label">Games</div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Uptime</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+                            <line x1="12" y1="6" x2="12" y2="6"/>
+                            <line x1="12" y1="18" x2="12" y2="18"/>
+                            <line x1="6" y1="12" x2="6" y2="12"/>
+                            <line x1="18" y1="12" x2="18" y2="12"/>
+                            <circle cx="12" cy="12" r="2"/>
+                        </svg>
+                    </div>
+                    <div class="stat-value">6+</div>
+                    <div class="stat-label">Games</div>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button id="getScriptBtn" class="btn btn-primary">Get Script</button>
+                <button id="discordBtn" class="btn btn-secondary">Discord</button>
+            </div>
+            
+            <div class="games-section">
+                <h2 class="section-title">Supported <span>Games</span></h2>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-image" style="background-image: url('https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0614.webp?raw=true')">
+                            <div class="game-name">Jailbreak</div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image" style="background-image: url('https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0729.webp?raw=true')">
+                            <div class="game-name">99 Nights In The Forest</div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image" style="background-image: url('https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0749.webp?raw=true')">
+                            <div class="game-name">Plants Verus Brainrots</div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image" style="background-image: url('https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0751.webp?raw=true')">
+                            <div class="game-name">Placeholder</div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image" style="background-image: url('https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0751.webp?raw=true')">
+                            <div class="game-name">Placeholder</div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image" style="background-image: url('https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0751.webp?raw=true')">
+                            <div class="game-name">Placeholder</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <div class="action-buttons">
-            <button id="getScriptBtn" class="btn btn-primary">Get Script</button>
-            <button id="discordBtn" class="btn btn-secondary">Discord</button>
-        </div>
-        
-        <div class="games-section">
-            <h2 class="section-title">Supported <span>Games</span></h2>
+        <div id="games" class="section">
+            <h2 class="section-title">All <span>Games</span></h2>
             <div class="games-grid">
                 <div class="game-card">
-                    <div class="game-image">
+                    <div class="game-image" style="background-image: url('https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0614.webp?raw=true')">
                         <div class="game-name">Jailbreak</div>
                     </div>
                 </div>
                 
                 <div class="game-card">
-                    <div class="game-image">
-                        <div class="game-name">Game 2</div>
+                    <div class="game-image" style="background-image: url('https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0729.webp?raw=true')">
+                        <div class="game-name">99 Nights In The Forest</div>
                     </div>
                 </div>
                 
                 <div class="game-card">
-                    <div class="game-image">
-                        <div class="game-name">Game 3</div>
+                    <div class="game-image" style="background-image: url('https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0749.webp?raw=true')">
+                        <div class="game-name">Plants Verus Brainrots</div>
                     </div>
                 </div>
                 
                 <div class="game-card">
-                    <div class="game-image">
-                        <div class="game-name">Game 4</div>
+                    <div class="game-image" style="background-image: url('https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0751.webp?raw=true')">
+                        <div class="game-name">Placeholder</div>
                     </div>
                 </div>
                 
                 <div class="game-card">
-                    <div class="game-image">
-                        <div class="game-name">Game 5</div>
+                    <div class="game-image" style="background-image: url('https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0751.webp?raw=true')">
+                        <div class="game-name">Placeholder</div>
                     </div>
                 </div>
                 
                 <div class="game-card">
-                    <div class="game-image">
-                        <div class="game-name">Game 6</div>
+                    <div class="game-image" style="background-image: url('https://github.com/ImNotWhyLclc/Rendex.cc/blob/main/IMG_0751.webp?raw=true')">
+                        <div class="game-name">Placeholder</div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="executors-section">
+        <div id="executors" class="section">
             <h2 class="executors-title">Executors</h2>
             <div class="executors-grid">
                 <div class="executor-card">
-                    <div class="executor-name">Solara</div>
-                    <div class="status red">🔴</div>
+                    <div class="executor-header">
+                        <div class="executor-name">Solara</div>
+                        <div class="status red">🔴</div>
+                    </div>
+                    <div class="executor-links">
+                        <a href="https://getsolara.dev/discord" target="_blank" class="executor-link discord">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Discord
+                        </a>
+                        <a href="https://getsolara.dev/" target="_blank" class="executor-link website">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            Website
+                        </a>
+                    </div>
                 </div>
+                
                 <div class="executor-card">
-                    <div class="executor-name">Xeno</div>
-                    <div class="status red">🔴</div>
+                    <div class="executor-header">
+                        <div class="executor-name">Xeno</div>
+                        <div class="status red">🔴</div>
+                    </div>
+                    <div class="executor-links">
+                        <a href="https://discord.gg/xe-no" target="_blank" class="executor-link discord">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Discord
+                        </a>
+                        <a href="https://www.xeno.onl/" target="_blank" class="executor-link website">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            Website
+                        </a>
+                    </div>
                 </div>
+                
                 <div class="executor-card">
-                    <div class="executor-name">Volcano</div>
-                    <div class="status green">🟢</div>
+                    <div class="executor-header">
+                        <div class="executor-name">Volcano</div>
+                        <div class="status green">🟢</div>
+                    </div>
+                    <div class="executor-links">
+                        <a href="https://volcano.wtf/discord.html" target="_blank" class="executor-link discord">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Discord
+                        </a>
+                        <a href="https://volcano.wtf/" target="_blank" class="executor-link website">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            Website
+                        </a>
+                    </div>
                 </div>
+                
                 <div class="executor-card">
-                    <div class="executor-name">Seliware</div>
-                    <div class="status green">🟢</div>
+                    <div class="executor-header">
+                        <div class="executor-name">Seliware</div>
+                        <div class="status green">🟢</div>
+                    </div>
+                    <div class="executor-links">
+                        <a href="https://discord.com/invite/nzEggEE9vx" target="_blank" class="executor-link discord">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Discord
+                        </a>
+                        <a href="https://seliware.com/" target="_blank" class="executor-link website">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            Website
+                        </a>
+                    </div>
                 </div>
+                
                 <div class="executor-card">
-                    <div class="executor-name">Wave/Ocean</div>
-                    <div class="status green">🟢</div>
+                    <div class="executor-header">
+                        <div class="executor-name">Wave/Ocean</div>
+                        <div class="status green">🟢</div>
+                    </div>
+                    <div class="executor-links">
+                        <a href="https://discord.gg/rARhPpN7fY" target="_blank" class="executor-link discord">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Discord
+                        </a>
+                        <a href="https://getwave.gg/" target="_blank" class="executor-link website">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            Website
+                        </a>
+                    </div>
                 </div>
+                
                 <div class="executor-card">
-                    <div class="executor-name">Delta</div>
-                    <div class="status green">🟢</div>
+                    <div class="executor-header">
+                        <div class="executor-name">Delta</div>
+                        <div class="status green">🟢</div>
+                    </div>
+                    <div class="executor-links">
+                        <a href="https://discord.gg/deltax" target="_blank" class="executor-link discord">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Discord
+                        </a>
+                        <a href="https://deltaexploits.gg" target="_blank" class="executor-link website">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            Website
+                        </a>
+                    </div>
                 </div>
+                
                 <div class="executor-card">
-                    <div class="executor-name">Ronix</div>
-                    <div class="status green">🟢</div>
+                    <div class="executor-header">
+                        <div class="executor-name">Ronix</div>
+                        <div class="status green">🟢</div>
+                    </div>
+                    <div class="executor-links">
+                        <a href="https://discord.gg/ronixstudios" target="_blank" class="executor-link discord">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Discord
+                        </a>
+                        <a href="https://ronixstudios.io/#/download?platform=android" target="_blank" class="executor-link website">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            Website
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="executor-card">
+                    <div class="executor-header">
+                        <div class="executor-name">Neutron</div>
+                        <div class="status yellow">🟡</div>
+                    </div>
+                    <div class="executor-links">
+                        <a href="https://discord.gg/MNJaS59Svk" target="_blank" class="executor-link discord">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Discord
+                        </a>
+                        <a href="https://www.neutron-executor.xyz/download?platform=android" target="_blank" class="executor-link website">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            Website
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="executor-card">
+                    <div class="executor-header">
+                        <div class="executor-name">Cryptic</div>
+                        <div class="status yellow">🟡</div>
+                    </div>
+                    <div class="executor-links">
+                        <a href="https://discord.gg/qM3WZhQShn" target="_blank" class="executor-link discord">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Discord
+                        </a>
+                        <a href="https://getcryptic.net" target="_blank" class="executor-link website">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            Website
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -424,9 +701,9 @@
     </div>
 
     <script>
-        // Copy script to clipboard
+        // Copy script to clipboard - NOW USING YOUR SECURE ENDPOINT
         document.getElementById('getScriptBtn').addEventListener('click', function() {
-            const script = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/ImNotWhyLclc/Rendex/refs/heads/main/Loader.luau "))()';
+            const script = 'loadstring(game:HttpGet("https://yourwebsite.com/loader.php"))()';
             navigator.clipboard.writeText(script).then(() => {
                 showNotification();
             }).catch(err => {
@@ -434,20 +711,22 @@
             });
         });
         
-        // Discord button - opens in new tab
         document.getElementById('discordBtn').addEventListener('click', function() {
             window.open('https://discord.gg/X4GW8N5GdW', '_blank');
         });
         
-        // Tab navigation
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
                 document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
                 this.classList.add('active');
+                
+                document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+                
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
             });
         });
         
-        // Show notification
         function showNotification() {
             const notification = document.getElementById('notification');
             notification.classList.add('show');
